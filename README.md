@@ -32,6 +32,12 @@ Docker-compose.yml allows us to run multiple containers at once. It uses the Doc
 
 Docker-compose-production.yml also creates containers but it only starts the db and serves our react application straight from the hapi.js node server without hot reloading and it minifies all of the js code.
 
+## Useful Docker Commands
+* Show all running containers with `docker ps`
+* Stop a container with `docker stop name` where name is the container name that can be found by running `docker ps`
+* Stop all containers with `docker kill $(docker ps -q)` or run the npm script that does that `npm run stopall`
+* Open bash in a container with `docker exec -it name /bin/bash`
+
 
 ## CSS Modules
 All styles come from app.css and are loaded into the app as [CSS Modules](https://css-tricks.com/css-modules-part-1-need/). To use just import the css file into the component you want to style e.g ```import styles from '../style/app.css'``` and then add the class in the component as `className={styles.class}`. Check out Home.jsx for an example of how to do this.
