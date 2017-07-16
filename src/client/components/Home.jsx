@@ -2,6 +2,7 @@ import React from 'react';
 import Title from './Title';
 import styles from '../style/app.css';
 import userFetcher from '../data/userFetcher';
+import recipeFetcher from '../data/recipeFetcher';
 
 export default class Home extends React.Component {
   constructor (props) {
@@ -17,6 +18,12 @@ export default class Home extends React.Component {
 
   componentDidMount () {
     this.fetchUsers();
+    this.fetchRecipes('turkey');
+  }
+
+  async fetchChickenRecipes (query) {
+    const recipes = await recipeFetcher.getRecipes(query, 0, 10);
+    console.log(recipes);
   }
 
   async fetchUsers () {
