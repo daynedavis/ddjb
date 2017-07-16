@@ -1,0 +1,68 @@
+body {
+    font-family: "FreeSans", "Arimo", "Droid Sans", Helvetica, Arial, sans-serif;
+}
+
+button {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 0.5em 1em;
+    color: #fff;
+    border: 1px solid #999;
+    background-color: rgb(0, 120, 231);
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+button:hover,
+button:focus {
+    filter: alpha(opacity=90);
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+
+button:focus {
+    outline: 0;
+}
+
+input {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+}
+
+.card {
+    flex: 1;
+    max-width: 60%;
+    margin: auto;
+}
+
+.user {
+    background: lightgray;
+    margin-bottom: 5px;
+    padding: 2px;
+}
+
+.userlist {
+    margin-top: 20px;
+}
+
+.remove {
+    float: right;
+    margin-right: 5px;
+}
+
+.remove:hover {
+    color: maroon;
+    cursor: pointer;
+}
+
+.add {
+    margin-left: 20px;
+}

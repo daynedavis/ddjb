@@ -1,0 +1,41 @@
+version: '2'
+services:
+  db: 
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - "/tmp/hrdb:/data/db"
+  mongoclient:
+    image: mongoclient/mongoclient
+    ports:
+      - "3001:3000"
+  web:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    expose: 
+      - "8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/usr/src/app:rw"
+      - "/usr/src/app/node_modules"
+    environment:
+      - NODE_ENV=dev
+    command: npm run devserver
+  hapi:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    expose: 
+      - "3000"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/usr/src/app:rw"
+      - "/usr/src/app/node_modules"
+    environment:
+      - NODE_ENV=dev
+    command: npm run server
