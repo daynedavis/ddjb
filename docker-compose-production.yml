@@ -7,10 +7,6 @@ services:
     restart: always
     volumes:
       - "/tmp/hrdb:/data/db"
-  mongoclient:
-    image: mongoclient/mongoclient
-    ports:
-      - "3001:3000"
   hapi:
     build:
       context: .
