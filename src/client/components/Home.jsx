@@ -21,7 +21,7 @@ export default class Home extends React.Component {
     this.fetchRecipes('turkey');
   }
 
-  async fetchChickenRecipes (query) {
+  async fetchRecipes (query) {
     const recipes = await recipeFetcher.getRecipes(query, 0, 10);
     console.log(recipes);
   }
