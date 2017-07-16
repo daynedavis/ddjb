@@ -2,6 +2,7 @@
 React frontend, hapi.js server, mongodb, running in docker containers.
 
 ## Starting the App
+* First make sure the docker app is running. You should see the whale icon in your task bar.
 * Start for development with `npm start`. 
     * This enables hot reloading for the both the react app and the node server so when you make a change it will automatically restart.
 
