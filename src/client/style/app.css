@@ -43,14 +43,20 @@ input {
     margin: auto;
 }
 
-.user {
+.recipe {
     background: lightgray;
     margin-bottom: 5px;
     padding: 2px;
 }
 
-.userlist {
+.recipesContainer {
     margin-top: 20px;
+    display: flex;
+}
+
+.recipelist, .favorites {
+    flex: 1;
+    padding-right: 10px;
 }
 
 .remove {
