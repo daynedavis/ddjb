@@ -1,7 +1,6 @@
 import React from 'react';
 import Title from './Title';
 import styles from '../style/app.css';
-import userFetcher from '../data/userFetcher';
 import recipeFetcher from '../data/recipeFetcher';
 
 export default class Home extends React.Component {
@@ -9,46 +8,59 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {
-      users: []
+      recipes: [],
+      favorites: []
     }
 
-    this.addUser = this.addUser.bind(this);
-    this.removeUser = this.removeUser.bind(this);
+    this.favorite = this.favorite.bind(this);
+    this.fetchRecipes = this.fetchRecipes.bind(this);
+    this.unfavorite = this.unfavorite.bind(this);
   }
 
   componentDidMount () {
-    this.fetchUsers();
-    this.fetchRecipes('turkey');
+    this.fetchFavorites();
   }
 
-  async fetchRecipes (query) {
-    const recipes = await recipeFetcher.getRecipes(query, 0, 10);
+  async fetchRecipes () {
+    const recipes = await recipeFetcher.getRecipes(this.recipeQuery.value, 0, 10);
+    this.setState({ recipes });
     console.log(recipes);
   }
 
-  async fetchUsers () {
-    const users = await userFetcher.getUsers();
-    this.setState({ users });
+  async fetchFavorites () {
+    const favorites = await recipeFetcher.getFavorites();
+    this.setState({ favorites });
   }
 
-  async addUser () {
-    const users = await userFetcher.addUser(this.newName.value);
-    this.setState({ users });
-    this.newName.value = '';
+  async favorite (recipe) {
+    const favorites = await recipeFetcher.favoriteRecipe(recipe.recipe);
+    this.setState({ favorites });
   }
 
-  async removeUser (id) {
-    const users = await userFetcher.removeUser(id);
-    this.setState({ users });
+  async unfavorite (id) {
+    const favorites = await recipeFetcher.unfavoriteRecipe(id);
+    this.setState({ favorites });
   }
 
-  getUsers () {
-    const { users } = this.state;
-    return users.map((user, idx) => {
+  getRecipes () {
+    const { recipes } = this.state;
+    return recipes.map((recipe, idx) => {
       return (
-        <div className={styles.user} key={`User${idx}`}>
-          {user.name}
-          <div className={styles.remove} onClick={() => this.removeUser(user._id)}>x</div>
+        <div className={styles.recipe} key={`Recipe${idx}`}>
+          {recipe.recipe.label}
+          <div className={styles.remove} onClick={() => this.favorite(recipe)}>Favorite</div>
+        </div>
+      );
+    })
+  }
+
+  getFavorites () {
+    const { favorites } = this.state;
+    return favorites.map((favorite, idx) => {
+      return (
+        <div className={styles.recipe} key={`Favorite${idx}`}>
+          {favorite.recipe.label}
+          <div className={styles.remove} onClick={() => this.unfavorite(favorite._id)}>Remove</div>
         </div>
       );
     })
@@ -58,11 +70,18 @@ export default class Home extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.card}>
-          <Title title="Users" />
-          <input type="text" ref={(ref) => this.newName = ref} />
-          <button className={styles.add} onClick={this.addUser}>Add user</button>
-          <div className={styles.userlist}>
-            {this.getUsers()}
+          <Title title="Recipe Dashboard" />
+          <input type="text" ref={(ref) => this.recipeQuery = ref} />
+          <button className={styles.add} onClick={this.fetchRecipes}>Search Recipes</button>
+          <div className={styles.recipesContainer}>
+            <div className={styles.recipelist}>
+              <h3>Search Results</h3>
+              {this.getRecipes()}
+            </div>
+            <div className={styles.favorites}>
+              <h3>Favorites</h3>
+              {this.getFavorites()}
+            </div>
           </div>
         </div>
       </div>
