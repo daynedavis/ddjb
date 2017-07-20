@@ -22,7 +22,17 @@ export default class Home extends React.Component {
   }
 
   async fetchRecipes () {
-    const recipes = await recipeFetcher.getRecipes(this.recipeQuery.value, 0, 10);
+    let recipes = await recipeFetcher.getRecipes(this.recipeQuery.value, 0, 10);
+    let recipesLen = recipes.length;
+    for(var i = recipesLen - 1; i >= 0; i--) {
+        for(var j = 0; j < i; j++) {
+            if(recipes[i].recipe.calories < recipes[j].recipe.calories) {
+                var hold = recipes[i];
+                recipes[i] = recipes[j];
+                recipes[j] = hold;
+            }
+        }
+    }
     this.setState({ recipes });
     console.log(recipes);
   }
@@ -47,7 +57,7 @@ export default class Home extends React.Component {
     return recipes.map((recipe, idx) => {
       return (
         <div className={styles.recipe} key={`Recipe${idx}`}>
-          {recipe.recipe.label}
+          {recipe.recipe.label}: {recipe.recipe.calories}
           <div className={styles.remove} onClick={() => this.favorite(recipe)}>Favorite</div>
         </div>
       );
