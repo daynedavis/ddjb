@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
   server.connection({ port: 3000 });
 }
 
-server.register([Inert, require('./modules/core'), require('./modules/recipe')], () => {});
+// server.register([Inert, require('./modules/core'), require('./modules/recipe')], () => {});
 
 server.start((err) => {
   if (err) {

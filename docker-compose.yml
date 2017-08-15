@@ -1,6 +1,6 @@
 version: '2'
 services:
-  db: 
+  db:
     image: mongo
     ports:
       - "27017:27017"
@@ -15,7 +15,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    expose: 
+    expose:
       - "8080"
     ports:
       - "8080:8080"
@@ -29,7 +29,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    expose: 
+    expose:
       - "3000"
     ports:
       - "3000:3000"
