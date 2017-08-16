@@ -8,14 +8,14 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     // 'react-hot-loader/patch',
-    // 'webpack-dev-server/client?http://0.0.0.0:8080',
-    // 'babel-polyfill',
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'babel-polyfill',
     path.join(__dirname, 'src/app/main.ts')
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: '[name].js',
-    // publicPath: '/assets/'
+    publicPath: '/assets/'
   },
   plugins: [
     new HtmlWebpackPlugin(
@@ -25,21 +25,21 @@ module.exports = {
       filename: 'index.html'
     }
   ),
-    // new webpack.DefinePlugin({
-    //   'process.env.NODE_ENV': JSON.stringify('development')
-    // }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
   ],
-  // devServer: {
-  //   historyApiFallback: {
-  //     index: '/assets/'
-  //   },
-  //   proxy: {
-  //       '/api': {
-  //           target: 'http://hapi:3000',
-  //           secure: false
-  //       }
-  //   }
-  // },
+  devServer: {
+    historyApiFallback: {
+      index: '/assets/'
+    },
+    proxy: {
+        '/api': {
+            target: 'http://hapi:3000',
+            secure: false
+        }
+    }
+  },
   module: {
     rules: [
       {
@@ -56,7 +56,7 @@ module.exports = {
       },
       {
         test: /\.ts?$/,
-        loader: 'ts-loader'
+        loader: 'awesome-typescript-loader'
       },
       // {
       //   test: /\.css$/,
@@ -76,7 +76,7 @@ module.exports = {
     ]
   },
   resolve: {
-    // modules: ["node_modules"],
+    modules: ["node_modules"],
     extensions: ['.ts', 'tsx', '.js', '.jsx'],
   }
 };
