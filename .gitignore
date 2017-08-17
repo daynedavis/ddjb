@@ -3,3 +3,5 @@ npm-debug.log
 dist
 .idea/workspace.xml
 .idea/inspectionProfiles/
+src/app/**/*.js
+src/app/**/*.map
