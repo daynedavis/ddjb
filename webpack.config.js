@@ -7,7 +7,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    // 'react-hot-loader/patch',
     'webpack-dev-server/client?http://0.0.0.0:8080',
     'babel-polyfill',
     path.join(__dirname, 'src/app/main.ts')

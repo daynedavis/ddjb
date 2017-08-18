@@ -10,7 +10,7 @@
     "mongo": "docker run -d -p 3001:3000 mongoclient/mongoclient",
     "prod": "docker-compose -f docker-compose-production.yml build && docker-compose -f docker-compose-production.yml up",
     "server": "nodemon ./src/server/server.js",
-    "start": "webpack-dev-server --watch-poll --inline --hot",
+    "start": "docker-compose build && docker-compose up",
     "stopall": "docker kill $(docker ps -q)"
   },
   "author": "Dayne Davis",

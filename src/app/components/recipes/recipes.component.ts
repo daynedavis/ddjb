@@ -22,13 +22,13 @@ export class RecipesComponent {
 
   ngOnInit() {
     let query = "chicken";
-    this._recipesService.getRecipes(query)
+    this._recipesService.getRecipes(query, 0, 10)
       .subscribe((recipes: Observable<any>) => {
         this.handle(recipes);
       })
   }
 
   handle(recipes: any) {
-    this.recipes = recipes.hits;
+    this.recipes = recipes;
   }
 }

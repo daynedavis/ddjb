@@ -9,14 +9,10 @@ export class RecipesService {
 
   constructor(private http: Http) {}
 
-  getRecipes(query: String): Observable<any> {
-    const app_key = '20b9374bf59ff4f0f35dbea46f61bc0b';
-    const app_id = '4de41410';
-    const prefix = 'https://api.edamam.com/search?';
-    const from = 1;
-    const to = 10;
+  getRecipes(query: String, from: number, to: number): Observable<any> {
+    const body = { query, from, to };
 
-    return this.http.get(`${prefix}q=${query}&app_id=${app_id}&app_key=${app_key}&from=${from}&to=${to}`)
+    return this.http.post('/api/recipes', body)
       .map((res: Response) => res.json());
   }
 
